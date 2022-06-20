@@ -1,7 +1,7 @@
 package com.banking.financeapp.web;
 
 import com.banking.financeapp.TestData;
-import com.banking.financeapp.domain.Expense;
+import com.banking.financeapp.domain.entity.Expense;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
