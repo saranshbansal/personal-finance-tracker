@@ -3,27 +3,39 @@ package com.banking.financeapp.web;
 import com.banking.financeapp.TestData;
 import com.banking.financeapp.domain.Expense;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
+@Slf4j
 @RestController
-@RequestMapping("/finance")
+@RequestMapping("/v1/finance")
 public class FinanceController {
 
-	@Operation(summary = "Test api to write hello world")
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
+	/**
+	 *
+	 * @return list of all expenses
+	 */
+	@Operation(summary = "Api to show all expense")
+	@GetMapping("/expenses")
+	public ResponseEntity<List<Expense>> showExpenses() {
+		TestData testData = new TestData();
+		return ResponseEntity.ok(testData.showExpenses());
 	}
 
-	@Operation(summary = "Test api to show all expenses")
-	@GetMapping("/expense")
-	public List<Expense> getExpense() {
-		TestData testData = new TestData();
-		return testData.showExpenses();
+	/**
+	 *
+	 * @param expense instance of {@link Expense}
+	 * @return 201 if created successfully
+	 */
+	@Operation(summary = "Api to log an expense")
+	@PostMapping("/expense")
+	public ResponseEntity<String> logExpense(@RequestBody Expense expense) {
+		log.info("Logging expense {}", expense);
+		return new ResponseEntity<>(CREATED);
 	}
 }

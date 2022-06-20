@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class Expense {
-	int amount;
+	double amount;
 	String category;
 }
