@@ -1,6 +1,6 @@
 package com.banking.financeapp.web;
 
-import com.banking.financeapp.domain.entity.Expense;
+import com.banking.financeapp.domain.dto.ExpenseDto;
 import com.banking.financeapp.service.ExpenseLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
@@ -21,25 +21,27 @@ public class ExpenseController {
 	private ExpenseLogService expenseLogService;
 
 	/**
+	 * Show all expenses
 	 *
 	 * @return list of all expenses
 	 */
 	@Operation(summary = "Api to show all expense")
 	@GetMapping("/")
-	public ResponseEntity<List<Expense>> showExpenses() {
+	public ResponseEntity<List<ExpenseDto>> showExpenses() {
 		return ResponseEntity.ok(expenseLogService.showExpenses());
 	}
 
 	/**
+	 * Log an expense
 	 *
-	 * @param expense instance of {@link Expense}
+	 * @param expenseDto instance of {@link ExpenseDto}
 	 * @return 201 if created successfully
 	 */
 	@Operation(summary = "Api to log an expense")
 	@PostMapping("/")
-	public ResponseEntity<String> logExpense(@RequestBody Expense expense) {
-		log.info("Logging expense {}", expense);
-		expenseLogService.logExpense(expense);
+	public ResponseEntity<String> logExpense(@RequestBody ExpenseDto expenseDto) {
+		log.info("Logging expense {}", expenseDto);
+		expenseLogService.logExpense(expenseDto);
 		return new ResponseEntity<>(CREATED);
 	}
 }

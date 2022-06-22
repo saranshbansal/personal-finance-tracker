@@ -1,7 +1,7 @@
 package com.banking.financeapp;
 
-import com.banking.financeapp.domain.entity.Expense;
-import com.banking.financeapp.domain.entity.Metadata;
+import com.banking.financeapp.domain.entity.ExpenseEntity;
+import com.banking.financeapp.domain.entity.MetadataEntity;
 
 import java.util.List;
 
@@ -9,14 +9,14 @@ import static java.util.Arrays.asList;
 
 public class TestData {
 
-	public List<Expense> showExpenses() {
-		return asList(Expense.builder()
+	public List<ExpenseEntity> showExpenses() {
+		return asList(ExpenseEntity.builder()
 				.amount(100d)
-				.category(Metadata.builder().key("CAT1").build())
+				.category(MetadataEntity.builder().key("CAT1").build())
 				.build(),
-				Expense.builder()
+				ExpenseEntity.builder()
 				.amount(200d)
-				.category(Metadata.builder().key("CAT2").build())
+				.category(MetadataEntity.builder().key("CAT2").build())
 				.build());
 	}
 }
