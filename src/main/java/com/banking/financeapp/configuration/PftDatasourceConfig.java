@@ -26,7 +26,7 @@ import static java.util.TimeZone.setDefault;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = DOMAIN_REPO_PACKAGE,
-entityManagerFactoryRef = "pftEntityManagerFactory", transactionManagerRef = "pftTransactionManager")
+		entityManagerFactoryRef = "pftEntityManagerFactory", transactionManagerRef = "pftTransactionManager")
 @EnableJdbcHttpSession
 public class PftDatasourceConfig {
 	public static final String DEFAULT_TIME_ZONE = "Europe/London";
@@ -60,9 +60,7 @@ public class PftDatasourceConfig {
 	@Bean(name = "pftDataSource")
 	@SpringSessionDataSource
 	@ConfigurationProperties(prefix = "pft.datasource")
-	public DataSource pftDataSource(
-			@Qualifier("pftEntityManagerFactory") EntityManagerFactory entityManagerFactory
-	) {
+	public DataSource pftDataSource() {
 		setDefault(getTimeZone(DEFAULT_TIME_ZONE));
 		return DataSourceBuilder.create().build();
 	}
